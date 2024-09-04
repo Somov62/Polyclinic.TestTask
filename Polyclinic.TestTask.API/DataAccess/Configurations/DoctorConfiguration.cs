@@ -20,7 +20,7 @@ namespace Polyclinic.TestTask.API.DataAccess.Configurations
 
             builder.HasOne(p => p.Cabinet).WithMany();
             builder.HasOne(p => p.Specialization).WithMany();
-            builder.HasOne(p => p.MedicalDistrict).WithMany();
+            builder.HasOne(p => p.MedicalDistrict).WithMany().IsRequired(false);
         }
     }
 }

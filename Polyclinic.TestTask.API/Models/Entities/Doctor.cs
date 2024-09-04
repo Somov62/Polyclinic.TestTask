@@ -23,6 +23,6 @@
         /// <summary>
         /// Участок для участкового врача.
         /// </summary>
-        public MedicalDistrict MedicalDistrict { get; set; } = null!;
+        public MedicalDistrict? MedicalDistrict { get; set; } = null;
     }
 }
