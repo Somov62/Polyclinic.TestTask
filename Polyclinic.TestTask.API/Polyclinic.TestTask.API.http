@@ -1,6 +1,5 @@
 @Polyclinic.TestTask.API_HostAddress = http://localhost:5133
 
-GET {{Polyclinic.TestTask.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
+### Пример GET запроса:
+### GET {{Polyclinic.TestTask.API_HostAddress}}/controllerName/
+### Accept: application/json
