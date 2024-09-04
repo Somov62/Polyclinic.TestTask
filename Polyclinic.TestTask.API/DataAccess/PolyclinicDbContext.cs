@@ -6,7 +6,7 @@ namespace Polyclinic.TestTask.API.DataAccess
     /// <summary>
     /// Контекст базы данных поликлиники.
     /// </summary>
-    public class PolyclinicDbContext : DbContext
+    public class PolyclinicDbContext(IConfiguration configuration) : DbContext
     {
         /// <summary>
         /// Таблица с пациентами.
@@ -17,6 +17,14 @@ namespace Polyclinic.TestTask.API.DataAccess
         /// Таблица с врачами.
         /// </summary>
         public DbSet<Doctor> Doctors => Set<Doctor>();
+
+        /// <summary>
+        /// Конфигурация правил работы.
+        /// </summary>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString(nameof(PolyclinicDbContext)));
+        }
 
         /// <summary>
         /// Конфигурация сущностей.

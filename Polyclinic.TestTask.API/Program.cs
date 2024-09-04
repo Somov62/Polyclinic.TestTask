@@ -1,23 +1,30 @@
+using Microsoft.EntityFrameworkCore;
+using Polyclinic.TestTask.API.DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<PolyclinicDbContext>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Авто миграции при разработке.
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<PolyclinicDbContext>();
+    await dbContext.Database.MigrateAsync();
+}
+
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
