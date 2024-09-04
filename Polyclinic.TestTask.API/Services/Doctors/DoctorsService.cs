@@ -84,5 +84,22 @@ namespace Polyclinic.TestTask.API.Services.Doctors
 
             return doctor.Id;
         }
+
+        /// <summary>
+        /// Удаляет врача из бд.
+        /// </summary>
+        /// <returns> id врача или null, если врач не найден. </returns>
+        public async Task<int?> Delete(int doctorId, CancellationToken ct)
+        {
+            var doctor = await dbContext.Doctors.FindAsync([doctorId], cancellationToken: ct);
+            if (doctor == null)
+                return null;
+            
+            dbContext.Doctors.Remove(doctor);
+
+            await dbContext.SaveChangesAsync(ct);
+
+            return doctor.Id;
+        }
     }
 }

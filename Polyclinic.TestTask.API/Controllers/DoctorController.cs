@@ -49,5 +49,17 @@ namespace Polyclinic.TestTask.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Endpoint для удаления врача.
+        /// </summary>
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(
+            [FromRoute] int id,
+            CancellationToken ct)
+        {
+            var result = await doctorsService.Delete(id, ct);
+            return result.HasValue ? Ok(id) : NotFound();
+        }
     }
 }
