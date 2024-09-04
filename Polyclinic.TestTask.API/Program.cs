@@ -21,8 +21,7 @@ if (app.Environment.IsDevelopment())
 if (app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<PolyclinicDbContext>();
-    await dbContext.Database.MigrateAsync();
+    await DatabaseInitializationHelper.InitializeDevelopment(scope);
 }
 
 app.UseAuthorization();
