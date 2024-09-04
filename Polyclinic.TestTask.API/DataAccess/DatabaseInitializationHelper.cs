@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using Polyclinic.TestTask.API.Models.Entities;
 
 namespace Polyclinic.TestTask.API.DataAccess
