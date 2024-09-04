@@ -8,6 +8,7 @@ namespace Polyclinic.TestTask.API.DataAccess
     /// </summary>
     public class PolyclinicDbContext(IConfiguration configuration) : DbContext
     {
+        #region db сеты
         /// <summary>
         /// Таблица с пациентами.
         /// </summary>
@@ -17,6 +18,22 @@ namespace Polyclinic.TestTask.API.DataAccess
         /// Таблица с врачами.
         /// </summary>
         public DbSet<Doctor> Doctors => Set<Doctor>();
+
+        /// <summary>
+        /// Таблица с участками.
+        /// </summary>
+        public DbSet<MedicalDistrict> MedicalDistricts => Set<MedicalDistrict>();
+
+        /// <summary>
+        /// Таблица со специализациями.
+        /// </summary>
+        public DbSet<Specialization> Specializations => Set<Specialization>();
+
+        /// <summary>
+        /// Таблица с кабинетами.
+        /// </summary>
+        public DbSet<Cabinet> Cabinets => Set<Cabinet>(); 
+        #endregion
 
         /// <summary>
         /// Конфигурация правил работы.

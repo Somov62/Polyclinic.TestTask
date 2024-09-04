@@ -26,7 +26,7 @@ namespace Polyclinic.TestTask.API.DataAccess
                 return;
 
             // Наполняем отладочными данными.
-            var therapist = new Specialization() { Name = "Терапевт" };
+            var therapist = new Specialization() { Name = Specialization.THERAPIST_SPECIALIZATION_NAME };
 
             dbContext.Doctors.Add(new()
             {

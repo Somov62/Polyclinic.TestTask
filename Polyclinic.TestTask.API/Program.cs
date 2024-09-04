@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using Polyclinic.TestTask.API.DataAccess;
+using Polyclinic.TestTask.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<PolyclinicDbContext>();
+builder.Services.AddServices();
 
 var app = builder.Build();
 
