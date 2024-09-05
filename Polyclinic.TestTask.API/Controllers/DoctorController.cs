@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Polyclinic.TestTask.API.Requests.Doctors;
-using Polyclinic.TestTask.API.Services.Doctors;
+using Polyclinic.TestTask.API.Services;
 
 namespace Polyclinic.TestTask.API.Controllers
 {
@@ -16,7 +16,7 @@ namespace Polyclinic.TestTask.API.Controllers
         /// </summary>
         [HttpPost]
         public async Task<IActionResult> Create(
-            [FromBody] AddDoctorRequest request,
+            [FromBody] CreateDoctorRequest request,
             CancellationToken ct)
         {
             try

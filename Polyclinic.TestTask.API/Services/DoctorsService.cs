@@ -5,7 +5,7 @@ using Polyclinic.TestTask.API.Models.Entities;
 using Polyclinic.TestTask.API.Requests.Doctors;
 using Polyclinic.TestTask.API.Responses.Doctors;
 
-namespace Polyclinic.TestTask.API.Services.Doctors
+namespace Polyclinic.TestTask.API.Services
 {
     /// <summary>
     /// Сервис операций над сущностями врачей.
@@ -23,7 +23,7 @@ namespace Polyclinic.TestTask.API.Services.Doctors
                 .Include(nav => nav.Specialization)
                 .Include(nav => nav.MedicalDistrict)
                 .FirstOrDefaultAsync(p => p.Id == id, ct);
-            
+
             if (doctor == null)
                 return null;
 
@@ -52,16 +52,18 @@ namespace Polyclinic.TestTask.API.Services.Doctors
                 .Include(nav => nav.Cabinet)
                 .Include(nav => nav.Specialization)
                 .Include(nav => nav.MedicalDistrict)
-                .Select(p => new { 
-                    p.Id, 
-                    p.FIO, 
+                .Select(p => new
+                {
+                    p.Id,
+                    p.FIO,
                     CabinetNumber = p.Cabinet.Id,
-                    Specialization = p.Specialization.Name, 
-                    MedicalDistrict = p.MedicalDistrict == null ? 0 : p.MedicalDistrict.Id });
+                    Specialization = p.Specialization.Name,
+                    MedicalDistrict = p.MedicalDistrict == null ? 0 : p.MedicalDistrict.Id
+                });
 
             // Сортировка.
-            bool desc = request.OrderDirection?.Trim().ToLower() == "desc";
-            var orderFieldName = request.OrderBy?.Trim().ToLower();
+            bool desc = "desc".IgnoreCaseEquals(request.OrderDirection?.Trim());
+            var orderFieldName = request.OrderBy?.Trim();
 
             var orderedQuery = query.OrderBy(p => p.Id);
 
@@ -98,11 +100,11 @@ namespace Polyclinic.TestTask.API.Services.Doctors
         /// Добавляет врача в бд.
         /// </summary>
         /// <returns> id созданного врача. </returns>
-        public async Task<int> Create(AddDoctorRequest request, CancellationToken ct)
+        public async Task<int> Create(CreateDoctorRequest request, CancellationToken ct)
         {
             ArgumentNullException.ThrowIfNull(request);
 
-            var cabinet = await dbContext.Cabinets.FindAsync([request.CabinetId], cancellationToken: ct) ?? 
+            var cabinet = await dbContext.Cabinets.FindAsync([request.CabinetId], cancellationToken: ct) ??
                 throw new ArgumentException("Указанный кабинет не существует.");
 
             var specialization = await dbContext.Specializations.FindAsync([request.SpecializationId], cancellationToken: ct) ??
@@ -111,7 +113,7 @@ namespace Polyclinic.TestTask.API.Services.Doctors
             MedicalDistrict? district = null;
             if (request.MedicalDistrict.HasValue)
             {
-                if(!specialization.CanWorkOnMedicalDistrict())
+                if (!specialization.CanWorkOnMedicalDistrict())
                     throw new ArgumentException("Указать участок возможно только врачу терапевту.");
 
                 district = await dbContext.MedicalDistricts.FindAsync([request.MedicalDistrict.Value], cancellationToken: ct) ??
@@ -179,7 +181,7 @@ namespace Polyclinic.TestTask.API.Services.Doctors
             var doctor = await dbContext.Doctors.FindAsync([doctorId], cancellationToken: ct);
             if (doctor == null)
                 return null;
-            
+
             dbContext.Doctors.Remove(doctor);
 
             await dbContext.SaveChangesAsync(ct);

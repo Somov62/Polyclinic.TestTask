@@ -7,7 +7,7 @@
 /// <param name="CabinetId"> Номер кабинета. </param>
 /// <param name="SpecializationId"> Id специализации </param>
 /// <param name="MedicalDistrict"> Номер участка (для участковых врачей) </param>
-public record AddDoctorRequest(
+public record CreateDoctorRequest(
     string FIO,
     int CabinetId,
     int SpecializationId,

@@ -1,6 +1,4 @@
-﻿using Polyclinic.TestTask.API.Services.Doctors;
-
-namespace Polyclinic.TestTask.API.Services
+﻿namespace Polyclinic.TestTask.API.Services
 {
     /// <summary>
     /// Регистрация зависимостей - сервисов бизнес логики.
@@ -13,6 +11,7 @@ namespace Polyclinic.TestTask.API.Services
         public static IServiceCollection AddServices(this IServiceCollection services) =>
             services
                 .AddScoped<DoctorsService>()
+                .AddScoped<PatientsService>()
                 ;
     }
 }
