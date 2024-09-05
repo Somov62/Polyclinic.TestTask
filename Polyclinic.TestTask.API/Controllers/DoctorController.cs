@@ -31,6 +31,38 @@ namespace Polyclinic.TestTask.API.Controllers
         }
 
         /// <summary>
+        /// Endpoint для получения врача по id на редактирование.
+        /// </summary>
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(
+            [FromRoute] int id,
+            CancellationToken ct)
+        {
+            try
+            {
+                var result = await doctorsService.GetById(id, ct);
+                return result != null ? Ok(result) : NotFound();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Endpoint для получения врачей постранично с сортировкой.
+        /// </summary>
+        [HttpGet]
+        public async Task<IActionResult> GetByPage(
+            [FromQuery] GetDoctorsByPageRequest request,
+            CancellationToken ct)
+        {
+            var result = await doctorsService.GetByPage(request, ct);
+            return Ok(result);
+        }
+
+
+        /// <summary>
         /// Endpoint для редактирования врача.
         /// </summary>
         [HttpPut("{id:int}")]

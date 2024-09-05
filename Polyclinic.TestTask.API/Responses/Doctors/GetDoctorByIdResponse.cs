@@ -1,13 +1,13 @@
-﻿namespace Polyclinic.TestTask.API.Requests.Doctors;
+﻿namespace Polyclinic.TestTask.API.Responses.Doctors;
 
 /// <summary>
-/// Запрос на добавление врача.
+/// Ответ на запрос врача по id.
 /// </summary>
 /// <param name="FIO"> ФИО </param>
 /// <param name="CabinetId"> Номер кабинета. </param>
 /// <param name="SpecializationId"> Id специализации </param>
 /// <param name="MedicalDistrict"> Номер участка (для участковых врачей) </param>
-public record AddDoctorRequest(
+public record GetDoctorByIdResponse(
     string FIO,
     int CabinetId,
     int SpecializationId,

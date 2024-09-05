@@ -1,4 +1,5 @@
-﻿namespace Polyclinic.TestTask.API.Models.Entities
+﻿
+namespace Polyclinic.TestTask.API.Models.Entities
 {
     /// <summary>
     /// Модель врача.
