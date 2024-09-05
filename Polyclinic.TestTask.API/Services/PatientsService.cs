@@ -27,6 +27,7 @@ namespace Polyclinic.TestTask.API.Services
                 return null;
 
             return new(
+                patient.Id,
                 patient.FirstName,
                 patient.LastName,
                 patient.Patronymic,

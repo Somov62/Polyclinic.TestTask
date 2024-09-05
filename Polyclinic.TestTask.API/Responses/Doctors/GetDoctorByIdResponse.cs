@@ -8,6 +8,7 @@
 /// <param name="SpecializationId"> Id специализации </param>
 /// <param name="MedicalDistrict"> Номер участка (для участковых врачей) </param>
 public record GetDoctorByIdResponse(
+    int Id,
     string FIO,
     int CabinetId,
     int SpecializationId,

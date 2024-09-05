@@ -11,6 +11,7 @@
 /// <param name="BirthDate"> Дата рождения. </param>
 /// <param name="MedicalDistrict"> Участок, к которому прикреплен. </param>
 public record GetPatientByIdResponse(
+    int Id,
     string FirstName,
     string LastName,
     string? Patronymic,
